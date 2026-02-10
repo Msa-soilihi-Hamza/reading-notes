@@ -1,0 +1,47 @@
+@component('components/layout')
+  <div class="auth-container">
+    <h1 class="auth-title">Modifier l'utilisateur</h1>
+
+    <form action="/admin/users/{{ editUser.id }}?_method=PUT" method="POST" class="auth-form">
+      {{ csrfField() }}
+
+      <div class="form-group">
+        <label for="fullName" class="form-label">Nom complet</label>
+        <input type="text" id="fullName" name="fullName" value="{{ old('fullName') ?? editUser.fullName ?? '' }}" class="form-input" required />
+        @if(flashMessages.has('errors.fullName'))
+          <p class="form-error">{{ flashMessages.get('errors.fullName') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" value="{{ old('email') ?? editUser.email }}" class="form-input" required />
+        @if(flashMessages.has('errors.email'))
+          <p class="form-error">{{ flashMessages.get('errors.email') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Nouveau mot de passe (laisser vide pour ne pas changer)</label>
+        <input type="password" id="password" name="password" class="form-input" minlength="8" />
+        @if(flashMessages.has('errors.password'))
+          <p class="form-error">{{ flashMessages.get('errors.password') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" name="role" class="form-input" required>
+          <option value="user" {{ editUser.role === 'user' ? 'selected' : '' }}>Utilisateur</option>
+          <option value="admin" {{ editUser.role === 'admin' ? 'selected' : '' }}>Administrateur</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Enregistrer</button>
+
+      <p class="auth-footer">
+        <a href="/admin/users">Retour a la liste</a>
+      </p>
+    </form>
+  </div>
+@end

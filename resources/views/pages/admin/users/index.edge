@@ -1,0 +1,43 @@
+@component('components/layout')
+  <div class="admin-header">
+    <h1 class="page-title">Gestion des utilisateurs</h1>
+    <a href="/admin/users/create" class="btn-primary">Ajouter un utilisateur</a>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(user in users)
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.fullName ?? '-' }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <span class="badge {{ user.role === 'admin' ? 'badge-admin' : 'badge-user' }}">
+                {{ user.role }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <a href="/admin/users/{{ user.id }}/edit" class="btn-sm btn-edit">Modifier</a>
+              @if(user.id !== auth.user.id)
+                <form action="/admin/users/{{ user.id }}?_method=DELETE" method="POST" class="inline-form">
+                  {{ csrfField() }}
+                  <button type="submit" class="btn-sm btn-delete" onclick="return confirm('Supprimer cet utilisateur ?')">Supprimer</button>
+                </form>
+              @end
+            </td>
+          </tr>
+        @end
+      </tbody>
+    </table>
+  </div>
+@end
