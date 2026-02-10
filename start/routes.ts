@@ -27,7 +27,7 @@ router
     router.get('/login', [AuthController, 'showLogin'])
     router.post('/login', [AuthController, 'login'])
   })
-  .use(middleware.guest())
+  .use([middleware.guest(), middleware.throttle()])
 
 // Logout - accessible uniquement aux utilisateurs connectes
 router.post('/logout', [AuthController, 'logout']).use(middleware.auth())

@@ -27,14 +27,14 @@
     @if(book.ingredients)
       <div class="recipe-section">
         <h2 class="recipe-section-title">Ingredients</h2>
-        <div class="recipe-text recipe-ingredients">{{{ book.ingredients.replace(/\n/g, '<br>') }}}</div>
+        <div class="recipe-text recipe-pre">{{ book.ingredients }}</div>
       </div>
     @end
 
     @if(book.instructions)
       <div class="recipe-section">
         <h2 class="recipe-section-title">Instructions</h2>
-        <div class="recipe-text recipe-instructions">{{{ book.instructions.replace(/\n/g, '<br>') }}}</div>
+        <div class="recipe-text recipe-pre">{{ book.instructions }}</div>
       </div>
     @end
   </div>

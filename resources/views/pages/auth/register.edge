@@ -45,9 +45,22 @@
           required
           minlength="8"
         />
+        <p class="form-hint">Min. 8 caracteres, 1 majuscule, 1 minuscule, 1 chiffre</p>
         @if(flashMessages.has('errors.password'))
           <p class="form-error">{{ flashMessages.get('errors.password') }}</p>
         @end
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
+        <input
+          type="password"
+          id="password_confirmation"
+          name="password_confirmation"
+          class="form-input"
+          required
+          minlength="8"
+        />
       </div>
 
       <button type="submit" class="btn-submit">S'inscrire</button>

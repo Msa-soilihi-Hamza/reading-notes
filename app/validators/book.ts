@@ -10,7 +10,6 @@ export const createBookValidator = vine.compile(
     cookingTime: vine.number().positive().optional(),
     servings: vine.number().positive().optional(),
     difficulty: vine.enum(['facile', 'moyen', 'difficile']),
-    imageUrl: vine.string().trim().maxLength(500).optional(),
   })
 )
 
@@ -24,6 +23,5 @@ export const updateBookValidator = vine.compile(
     cookingTime: vine.number().positive().optional(),
     servings: vine.number().positive().optional(),
     difficulty: vine.enum(['facile', 'moyen', 'difficile']),
-    imageUrl: vine.string().trim().maxLength(500).optional(),
   })
 )

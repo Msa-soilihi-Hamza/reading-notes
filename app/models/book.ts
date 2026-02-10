@@ -34,9 +34,6 @@ export default class Book extends BaseModel {
   @column()
   declare difficulty: string
 
-  @column()
-  declare imageUrl: string | null
-
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 

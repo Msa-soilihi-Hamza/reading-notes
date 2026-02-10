@@ -23,7 +23,6 @@ export default class extends BaseSchema {
       table.integer('cooking_time').unsigned().nullable()
       table.integer('servings').unsigned().nullable()
       table.string('difficulty', 50).defaultTo('moyen')
-      table.string('image_url', 500).nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

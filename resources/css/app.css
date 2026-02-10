@@ -644,6 +644,10 @@ html, body {
   line-height: 1.7;
 }
 
+.recipe-pre {
+  white-space: pre-line;
+}
+
 /* ===== FORM HELPERS ===== */
 .form-textarea {
   resize: vertical;
