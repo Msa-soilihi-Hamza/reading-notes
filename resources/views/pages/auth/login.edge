@@ -1,0 +1,51 @@
+@component('components/layout')
+  <div class="auth-container">
+    <h1 class="auth-title">Connexion</h1>
+
+    <form action="/login" method="POST" class="auth-form">
+      {{ csrfField() }}
+
+      @if(flashMessages.has('auth.error'))
+        <div class="flash-error">
+          {{ flashMessages.get('auth.error') }}
+        </div>
+      @end
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="{{ old('email') ?? '' }}"
+          class="form-input"
+          required
+        />
+        @if(flashMessages.has('errors.email'))
+          <p class="form-error">{{ flashMessages.get('errors.email') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-input"
+          required
+        />
+        @if(flashMessages.has('errors.password'))
+          <p class="form-error">{{ flashMessages.get('errors.password') }}</p>
+        @end
+      </div>
+
+      <button type="submit" class="btn-submit">Se connecter</button>
+
+      <p class="auth-footer">
+        Pas encore de compte ?
+        <a href="/register">S'inscrire</a>
+      </p>
+    </form>
+  </div>
+@end

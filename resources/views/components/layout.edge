@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title ?? 'Reading Notes' }}</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-brand">Reading Notes</a>
+      <div class="navbar-links">
+        @if(auth.isAuthenticated)
+          <span class="navbar-user">{{ auth.user.fullName ?? auth.user.email }}</span>
+          <form action="/logout" method="POST">
+            {{ csrfField() }}
+            <button type="submit" class="btn-logout">Deconnexion</button>
+          </form>
+        @else
+          <a href="/login" class="link-login">Connexion</a>
+          <a href="/register" class="btn-register-nav">Inscription</a>
+        @end
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    @if(flashMessages.has('success'))
+      <div class="flash-success">
+        {{ flashMessages.get('success') }}
+      </div>
+    @end
+
+    @if(flashMessages.has('errors'))
+      <div class="flash-error">
+        {{ flashMessages.get('errors') }}
+      </div>
+    @end
+
+    {{{ await $slots.main() }}}
+  </main>
+</body>
+</html>
