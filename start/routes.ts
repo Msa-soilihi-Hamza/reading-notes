@@ -14,6 +14,7 @@ const AuthController = () => import('#controllers/auth_controller')
 const HomeController = () => import('#controllers/home_controller')
 const AdminUsersController = () => import('#controllers/admin_users_controller')
 const ProfileController = () => import('#controllers/profile_controller')
+const BooksController = () => import('#controllers/books_controller')
 
 // Page d'accueil
 router.get('/', [HomeController, 'index'])
@@ -41,6 +42,14 @@ router
   })
   .use(middleware.auth())
 
+// Recettes - accessible uniquement aux utilisateurs connectes
+router
+  .group(() => {
+    router.get('/books', [BooksController, 'index'])
+    router.get('/books/:id', [BooksController, 'show'])
+  })
+  .use(middleware.auth())
+
 // Admin - accessible uniquement aux admins
 router
   .group(() => {
@@ -50,5 +59,12 @@ router
     router.get('/admin/users/:id/edit', [AdminUsersController, 'edit'])
     router.put('/admin/users/:id', [AdminUsersController, 'update'])
     router.delete('/admin/users/:id', [AdminUsersController, 'destroy'])
+
+    router.get('/admin/books', [BooksController, 'adminIndex'])
+    router.get('/admin/books/create', [BooksController, 'create'])
+    router.post('/admin/books', [BooksController, 'store'])
+    router.get('/admin/books/:id/edit', [BooksController, 'edit'])
+    router.put('/admin/books/:id', [BooksController, 'update'])
+    router.delete('/admin/books/:id', [BooksController, 'destroy'])
   })
   .use([middleware.auth(), middleware.admin()])

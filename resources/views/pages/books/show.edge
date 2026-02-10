@@ -1,0 +1,41 @@
+@component('components/layout')
+  <div class="recipe-detail">
+    <a href="/books" class="back-link">&larr; Retour aux recettes</a>
+
+    <h1 class="recipe-title">{{ book.title }}</h1>
+
+    <div class="recipe-meta-bar">
+      @if(book.category)
+        <span class="recipe-category">{{ book.category }}</span>
+      @end
+      @if(book.cookingTime)
+        <span class="recipe-meta-item">{{ book.cookingTime }} min</span>
+      @end
+      @if(book.servings)
+        <span class="recipe-meta-item">{{ book.servings }} personnes</span>
+      @end
+      <span class="badge-difficulty badge-{{ book.difficulty }}">{{ book.difficulty }}</span>
+    </div>
+
+    @if(book.description)
+      <div class="recipe-section">
+        <h2 class="recipe-section-title">Description</h2>
+        <p class="recipe-text">{{ book.description }}</p>
+      </div>
+    @end
+
+    @if(book.ingredients)
+      <div class="recipe-section">
+        <h2 class="recipe-section-title">Ingredients</h2>
+        <div class="recipe-text recipe-ingredients">{{{ book.ingredients.replace(/\n/g, '<br>') }}}</div>
+      </div>
+    @end
+
+    @if(book.instructions)
+      <div class="recipe-section">
+        <h2 class="recipe-section-title">Instructions</h2>
+        <div class="recipe-text recipe-instructions">{{{ book.instructions.replace(/\n/g, '<br>') }}}</div>
+      </div>
+    @end
+  </div>
+@end

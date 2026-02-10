@@ -1,0 +1,42 @@
+@component('components/layout')
+  <div class="admin-header">
+    <h1 class="page-title">Gestion des recettes</h1>
+    <a href="/admin/books/create" class="btn-primary">Ajouter une recette</a>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titre</th>
+          <th>Categorie</th>
+          <th>Difficulte</th>
+          <th>Temps</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(book in books)
+          <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.category ?? '-' }}</td>
+            <td>
+              <span class="badge-difficulty badge-{{ book.difficulty }}">{{ book.difficulty }}</span>
+            </td>
+            <td>{{ book.cookingTime ? book.cookingTime + ' min' : '-' }}</td>
+            <td class="actions-cell">
+              <a href="/books/{{ book.id }}" class="btn-sm btn-view">Voir</a>
+              <a href="/admin/books/{{ book.id }}/edit" class="btn-sm btn-edit">Modifier</a>
+              <form action="/admin/books/{{ book.id }}?_method=DELETE" method="POST" class="inline-form">
+                {{ csrfField() }}
+                <button type="submit" class="btn-sm btn-delete" onclick="return confirm('Supprimer cette recette ?')">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+        @end
+      </tbody>
+    </table>
+  </div>
+@end

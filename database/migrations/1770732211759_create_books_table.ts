@@ -16,11 +16,14 @@ export default class extends BaseSchema {
         .notNullable()
 
       table.string('title', 255).notNullable()
-      table.string('author', 255).notNullable()
+      table.string('category', 100).nullable()
       table.text('description').nullable()
-      table.integer('rating').unsigned().nullable()
-      table.integer('pages').unsigned().nullable()
-      table.string('status', 50).defaultTo('to_read')
+      table.text('ingredients', 'longtext').nullable()
+      table.text('instructions', 'longtext').nullable()
+      table.integer('cooking_time').unsigned().nullable()
+      table.integer('servings').unsigned().nullable()
+      table.string('difficulty', 50).defaultTo('moyen')
+      table.string('image_url', 500).nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

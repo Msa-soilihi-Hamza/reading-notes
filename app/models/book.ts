@@ -14,19 +14,28 @@ export default class Book extends BaseModel {
   declare title: string
 
   @column()
-  declare author: string
+  declare category: string | null
 
   @column()
   declare description: string | null
 
   @column()
-  declare rating: number | null
+  declare ingredients: string | null
 
   @column()
-  declare pages: number | null
+  declare instructions: string | null
 
   @column()
-  declare status: 'to_read' | 'reading' | 'read'
+  declare cookingTime: number | null
+
+  @column()
+  declare servings: number | null
+
+  @column()
+  declare difficulty: string
+
+  @column()
+  declare imageUrl: string | null
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>

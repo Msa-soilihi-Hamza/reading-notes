@@ -1,0 +1,36 @@
+@component('components/layout')
+  <div class="recipes-header">
+    <h1 class="page-title">Recettes de cuisine africaine</h1>
+  </div>
+
+  @if(books.length === 0)
+    <div class="empty-state">
+      <p>Aucune recette disponible pour le moment.</p>
+    </div>
+  @else
+    <div class="recipes-grid">
+      @each(book in books)
+        <a href="/books/{{ book.id }}" class="recipe-card">
+          <div class="recipe-card-body">
+            <h2 class="recipe-card-title">{{ book.title }}</h2>
+            @if(book.category)
+              <span class="recipe-category">{{ book.category }}</span>
+            @end
+            @if(book.description)
+              <p class="recipe-card-desc">{{ book.description.substring(0, 120) }}{{ book.description.length > 120 ? '...' : '' }}</p>
+            @end
+            <div class="recipe-card-meta">
+              @if(book.cookingTime)
+                <span>{{ book.cookingTime }} min</span>
+              @end
+              @if(book.servings)
+                <span>{{ book.servings }} pers.</span>
+              @end
+              <span class="badge-difficulty badge-{{ book.difficulty }}">{{ book.difficulty }}</span>
+            </div>
+          </div>
+        </a>
+      @end
+    </div>
+  @end
+@end

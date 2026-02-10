@@ -12,8 +12,10 @@
       <a href="/" class="navbar-brand">Reading Notes</a>
       <div class="navbar-links">
         @if(auth.isAuthenticated)
+          <a href="/books" class="nav-link">Recettes</a>
           @if(auth.user.role === 'admin')
             <a href="/admin/users" class="nav-link">Utilisateurs</a>
+            <a href="/admin/books" class="nav-link">Gerer recettes</a>
           @end
           <a href="/profile" class="nav-link">{{ auth.user.fullName ?? auth.user.email }}</a>
           <form action="/logout" method="POST">

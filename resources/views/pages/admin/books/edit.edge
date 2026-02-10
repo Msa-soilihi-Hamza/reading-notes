@@ -1,0 +1,76 @@
+@component('components/layout')
+  <div class="auth-container" style="max-width: 600px;">
+    <h1 class="auth-title">Modifier la recette</h1>
+
+    <form action="/admin/books/{{ book.id }}?_method=PUT" method="POST" class="auth-form">
+      {{ csrfField() }}
+
+      <div class="form-group">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" id="title" name="title" value="{{ old('title') ?? book.title }}" class="form-input" required />
+        @if(flashMessages.has('errors.title'))
+          <p class="form-error">{{ flashMessages.get('errors.title') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="category" class="form-label">Categorie</label>
+        <input type="text" id="category" name="category" value="{{ old('category') ?? book.category ?? '' }}" class="form-input" placeholder="Ex: Plat principal, Dessert, Entree..." />
+        @if(flashMessages.has('errors.category'))
+          <p class="form-error">{{ flashMessages.get('errors.category') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" class="form-input form-textarea" rows="3">{{ old('description') ?? book.description ?? '' }}</textarea>
+        @if(flashMessages.has('errors.description'))
+          <p class="form-error">{{ flashMessages.get('errors.description') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="ingredients" class="form-label">Ingredients (un par ligne)</label>
+        <textarea id="ingredients" name="ingredients" class="form-input form-textarea" rows="6">{{ old('ingredients') ?? book.ingredients ?? '' }}</textarea>
+        @if(flashMessages.has('errors.ingredients'))
+          <p class="form-error">{{ flashMessages.get('errors.ingredients') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
+        <label for="instructions" class="form-label">Instructions (une etape par ligne)</label>
+        <textarea id="instructions" name="instructions" class="form-input form-textarea" rows="8">{{ old('instructions') ?? book.instructions ?? '' }}</textarea>
+        @if(flashMessages.has('errors.instructions'))
+          <p class="form-error">{{ flashMessages.get('errors.instructions') }}</p>
+        @end
+      </div>
+
+      <div class="form-row">
+        <div class="form-group form-half">
+          <label for="cookingTime" class="form-label">Temps de cuisson (min)</label>
+          <input type="number" id="cookingTime" name="cookingTime" value="{{ old('cookingTime') ?? book.cookingTime ?? '' }}" class="form-input" min="1" />
+        </div>
+
+        <div class="form-group form-half">
+          <label for="servings" class="form-label">Nombre de personnes</label>
+          <input type="number" id="servings" name="servings" value="{{ old('servings') ?? book.servings ?? '' }}" class="form-input" min="1" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="difficulty" class="form-label">Difficulte</label>
+        <select id="difficulty" name="difficulty" class="form-input" required>
+          <option value="facile" {{ (old('difficulty') ?? book.difficulty) === 'facile' ? 'selected' : '' }}>Facile</option>
+          <option value="moyen" {{ (old('difficulty') ?? book.difficulty) === 'moyen' ? 'selected' : '' }}>Moyen</option>
+          <option value="difficile" {{ (old('difficulty') ?? book.difficulty) === 'difficile' ? 'selected' : '' }}>Difficile</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Enregistrer</button>
+
+      <p class="auth-footer">
+        <a href="/admin/books">Retour a la liste</a>
+      </p>
+    </form>
+  </div>
+@end
