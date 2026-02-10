@@ -8,6 +8,7 @@ export const updateProfileValidator = vine.compile(
 
 export const updatePasswordValidator = vine.compile(
   vine.object({
+    currentPassword: vine.string(),
     password: vine.string().minLength(8).maxLength(180),
   })
 )

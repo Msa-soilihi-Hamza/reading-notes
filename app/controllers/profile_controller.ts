@@ -1,4 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import hash from '@adonisjs/core/services/hash'
 import { updateProfileValidator, updatePasswordValidator } from '#validators/profile'
 
 export default class ProfileController {
@@ -18,8 +19,14 @@ export default class ProfileController {
   }
 
   async updatePassword({ request, response, auth, session }: HttpContext) {
-    const { password } = await request.validateUsing(updatePasswordValidator)
+    const { currentPassword, password } = await request.validateUsing(updatePasswordValidator)
     const user = auth.user!
+
+    const isValid = await hash.verify(user.password, currentPassword)
+    if (!isValid) {
+      session.flash('errors', 'L\'ancien mot de passe est incorrect')
+      return response.redirect('/profile')
+    }
 
     user.password = password
     await user.save()

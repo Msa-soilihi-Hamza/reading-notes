@@ -28,6 +28,14 @@
       {{ csrfField() }}
 
       <div class="form-group">
+        <label for="currentPassword" class="form-label">Ancien mot de passe</label>
+        <input type="password" id="currentPassword" name="currentPassword" class="form-input" required />
+        @if(flashMessages.has('errors.currentPassword'))
+          <p class="form-error">{{ flashMessages.get('errors.currentPassword') }}</p>
+        @end
+      </div>
+
+      <div class="form-group">
         <label for="password" class="form-label">Nouveau mot de passe</label>
         <input type="password" id="password" name="password" class="form-input" required minlength="8" />
         @if(flashMessages.has('errors.password'))
