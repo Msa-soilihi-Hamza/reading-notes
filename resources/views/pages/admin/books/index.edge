@@ -10,6 +10,7 @@
         <tr>
           <th>ID</th>
           <th>Titre</th>
+          <th>Auteur</th>
           <th>Categorie</th>
           <th>Difficulte</th>
           <th>Temps</th>
@@ -21,6 +22,7 @@
           <tr>
             <td>{{ book.id }}</td>
             <td>{{ book.title }}</td>
+            <td>{{ book.user?.fullName ?? book.user?.email ?? '-' }}</td>
             <td>{{ book.category ?? '-' }}</td>
             <td>
               <span class="badge-difficulty badge-{{ book.difficulty }}">{{ book.difficulty }}</span>

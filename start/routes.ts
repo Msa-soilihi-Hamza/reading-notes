@@ -47,6 +47,13 @@ router
   .group(() => {
     router.get('/books', [BooksController, 'index'])
     router.get('/books/:id', [BooksController, 'show'])
+
+    router.get('/my-recipes', [BooksController, 'myRecipes'])
+    router.get('/my-recipes/create', [BooksController, 'userCreate'])
+    router.post('/my-recipes', [BooksController, 'userStore'])
+    router.get('/my-recipes/:id/edit', [BooksController, 'userEdit'])
+    router.put('/my-recipes/:id', [BooksController, 'userUpdate'])
+    router.delete('/my-recipes/:id', [BooksController, 'userDestroy'])
   })
   .use(middleware.auth())
 

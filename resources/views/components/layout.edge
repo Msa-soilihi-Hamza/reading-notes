@@ -13,6 +13,7 @@
       <div class="navbar-links">
         @if(auth.isAuthenticated)
           <a href="/books" class="nav-link">Recettes</a>
+          <a href="/my-recipes" class="nav-link">Mes recettes</a>
           @if(auth.user.role === 'admin')
             <a href="/admin/users" class="nav-link">Utilisateurs</a>
             <a href="/admin/books" class="nav-link">Gerer recettes</a>
