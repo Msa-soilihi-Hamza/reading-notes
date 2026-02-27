@@ -5,6 +5,7 @@
     <h1 class="recipe-title">{{ book.title }}</h1>
 
     <div class="recipe-meta-bar">
+      <span class="recipe-meta-item">Par <strong>{{ book.user.fullName }}</strong></span>
       @if(book.category)
         <span class="recipe-category">{{ book.category }}</span>
       @end

@@ -7,7 +7,7 @@ export default class BooksController {
    * All users: list all recipes
    */
   async index({ view }: HttpContext) {
-    const books = await Book.query().orderBy('created_at', 'desc')
+    const books = await Book.query().preload('user').orderBy('created_at', 'desc')
     return view.render('pages/books/index', { books })
   }
 
@@ -15,7 +15,7 @@ export default class BooksController {
    * All users: show a single recipe
    */
   async show({ view, params }: HttpContext) {
-    const book = await Book.findOrFail(params.id)
+    const book = await Book.query().where('id', params.id).preload('user').firstOrFail()
     return view.render('pages/books/show', { book })
   }
 

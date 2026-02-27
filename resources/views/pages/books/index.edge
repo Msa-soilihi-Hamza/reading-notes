@@ -19,6 +19,9 @@
             @if(book.description)
               <p class="recipe-card-desc">{{ book.description.substring(0, 120) }}{{ book.description.length > 120 ? '...' : '' }}</p>
             @end
+            <div class="recipe-author">
+              Par <strong>{{ book.user.fullName }}</strong>
+            </div>
             <div class="recipe-card-meta">
               @if(book.cookingTime)
                 <span>{{ book.cookingTime }} min</span>
