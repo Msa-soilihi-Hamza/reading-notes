@@ -163,13 +163,13 @@ Explication : validation via `createBookValidator`, création du modèle et redi
 ```ts
 // app/validators/auth.ts (extrait)
 password: vine.string()
-    .minLength(8)
+    .minLength(12)
     .maxLength(180)
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])/)
     .confirmed()
 ```
 
-Explication : impose 8+ caractères, au moins une minuscule, une majuscule et un chiffre. Remarque : le code actuel n'impose pas obligatoirement un symbole.
+Explication : impose 12+ caractères, au moins une minuscule, une majuscule, un chiffre et un symbole.
 
 - Middleware de throttling (rate limiting simple en mémoire) :
 

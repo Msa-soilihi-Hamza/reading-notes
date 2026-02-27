@@ -1,4 +1,4 @@
-import vine from '@vinejs/vine'
+import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 export const registerValidator = vine.compile(
   vine.object({
@@ -13,12 +13,25 @@ export const registerValidator = vine.compile(
       }),
     password: vine
       .string()
-      .minLength(8)
+      .minLength(12)
       .maxLength(180)
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])/)
       .confirmed(),
   })
 )
+
+registerValidator.messagesProvider = new SimpleMessagesProvider({
+  'required': 'Ce champ est requis',
+  'string': 'Le champ doit etre une chaine de caracteres',
+  'email': "L'adresse email n'est pas valide",
+  'password.minLength': 'Le mot de passe doit faire au moins 12 caracteres',
+  'password.regex': 'Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un symbole',
+  'password_confirmation.confirmed': 'Les mots de passe ne correspondent pas',
+  'fullName.minLength': 'Le nom est trop court',
+  'database.unique': 'Cette valeur est deja utilisee',
+  'email.database.unique': 'Cette adresse email est deja utilisee',
+  'email.unique': 'Cette adresse email est deja utilisee',
+})
 
 export const loginValidator = vine.compile(
   vine.object({
@@ -26,3 +39,8 @@ export const loginValidator = vine.compile(
     password: vine.string(),
   })
 )
+
+loginValidator.messagesProvider = new SimpleMessagesProvider({
+  'required': 'Ce champ est requis',
+  'email': "L'adresse email n'est pas valide",
+})

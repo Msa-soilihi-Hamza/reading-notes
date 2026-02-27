@@ -18,11 +18,17 @@ export default class AuthController {
     return view.render('pages/auth/login')
   }
 
-  async login({ request, response, auth }: HttpContext) {
+  async login({ request, response, auth, session }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
-    const user = await User.verifyCredentials(email, password)
-    await auth.use('web').login(user)
-    return response.redirect('/')
+
+    try {
+      const user = await User.verifyCredentials(email, password)
+      await auth.use('web').login(user)
+      return response.redirect('/')
+    } catch {
+      session.flash('auth.error', 'Identifiants invalides')
+      return response.redirect('/login')
+    }
   }
 
   async logout({ response, auth }: HttpContext) {

@@ -151,8 +151,8 @@ withAuthFinder(() => hash.use('scrypt'))
 ```ts
 // auth.ts - Règles de validation
 email: vine.string().email().unique(),
-password: vine.string().minLength(8)
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+password: vine.string().minLength(12)
+  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])/)
 ```
 - **Shield (CSRF/XSS) :** Protection contre les injections.
 ```html

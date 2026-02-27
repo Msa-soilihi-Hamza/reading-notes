@@ -57,7 +57,7 @@ reading-notes/
 
 ## Sécurité
 
-- **Mots de passe** : hashage Scrypt + règles de complexité (majuscule, minuscule, chiffre, caractère spécial, 8 caractères minimum)
+- **Mots de passe** : hashage Scrypt + règles de complexité (majuscule, minuscule, chiffre, caractère spécial, 12 caractères minimum)
 - **Protection XSS** : échappement automatique des données affichées
 - **Protection CSRF** : tokens sur tous les formulaires
 - **CSP** (Content Security Policy) : politique stricte activée
