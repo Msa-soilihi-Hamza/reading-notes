@@ -37,4 +37,9 @@ export const http = defineConfig({
     secure: app.inProduction,
     sameSite: 'lax',
   },
+
+  /**
+   * Enable trust proxy to trust headers from Railway's load balancer.
+   */
+  trustProxy: env.get('TRUST_PROXY'),
 })
