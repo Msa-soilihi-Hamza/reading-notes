@@ -24,8 +24,8 @@ export default class extends BaseSchema {
       table.integer('servings').unsigned().nullable()
       table.string('difficulty', 50).defaultTo('moyen')
 
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.dateTime('created_at').notNullable()
+      table.dateTime('updated_at').nullable()
     })
   }
 
