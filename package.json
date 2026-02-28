@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
+    "render:build": "node ace build && vite build --outDir ./build/public",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
