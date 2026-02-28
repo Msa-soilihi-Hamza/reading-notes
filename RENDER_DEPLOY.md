@@ -11,7 +11,7 @@ Ce guide explique comment déployer l'application **Reading Notes** sur Render.
 2. Configurez les options suivantes :
    - **Runtime** : `Node`
    - **Build Command** : `npm install && npm run render:build`
-   - **Start Command** : `node ace migration:run --force && node build/bin/server.js`
+   - **Start Command** : `node build/ace.js migration:run --force && node build/bin/server.js`
 
 ## 3. Configuration des Variables d'Environnement
 Dans l'onglet **Environment** de votre Web Service, ajoutez ces variables :
