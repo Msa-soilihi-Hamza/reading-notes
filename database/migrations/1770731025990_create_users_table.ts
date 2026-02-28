@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.enum('role', ['admin', 'user']).defaultTo('user').notNullable()
 
-      table.dateTime('created_at').notNullable()
-      table.dateTime('updated_at').nullable()
+      table.specificType('created_at', 'DATETIME').notNullable()
+      table.specificType('updated_at', 'DATETIME').nullable()
     })
   }
 
